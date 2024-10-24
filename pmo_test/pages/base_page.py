@@ -1,3 +1,4 @@
+from selenium.webdriver import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
@@ -21,6 +22,7 @@ class BasePage:
     def find_element(self, locator):
         """Busca un elemento en la página."""
         try:
+            self.wait_for_element(locator)
             return self.driver.find_element(*locator)
         except NoSuchElementException as e:
             logger.error(f"No se encontró el elemento: {locator}")
@@ -41,4 +43,6 @@ class BasePage:
 
     def enter_text(self, locator, text):
         """Ingresa texto en un campo."""
+        self.find_element(locator).clear()
         self.find_element(locator).send_keys(text)
+        self.find_element(locator).send_keys(Keys.ENTER)
