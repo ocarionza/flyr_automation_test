@@ -1,8 +1,10 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from utils.logger import get_logger
+from config.environment import LOADER
 
 logger = get_logger()
 
@@ -46,3 +48,11 @@ class BasePage:
         self.find_element(locator).clear()
         self.find_element(locator).send_keys(text)
         self.find_element(locator).send_keys(Keys.ENTER)
+
+    def loader_invisibility(self):
+        WebDriverWait(self.driver, 40).until(EC.invisibility_of_element_located((By.XPATH, LOADER)))
+
+    def scroll(self, locator):
+        element = WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator))
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+        return element

@@ -3,7 +3,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from utils.logger import get_logger
-from config.environment import LOADER
 
 logger = get_logger()
 
@@ -149,6 +148,3 @@ class BookingPage(BasePage):
 
     def click_search(self):
         self.click(self.BTN_SEARCH)
-
-    def loader_invisibility(self):
-        WebDriverWait(self.driver, 40).until(EC.invisibility_of_element_located((By.XPATH, LOADER)))
