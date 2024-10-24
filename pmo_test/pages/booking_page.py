@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from utils.logger import get_logger
+from config.environment import LOADER
 
 logger = get_logger()
 
@@ -20,6 +21,18 @@ class BookingPage(BasePage):
     ORIGIN_FIELD = (By.XPATH, "//div[@id='originDiv']/input | //div[@id='originDiv']/button")
     INPUT_ORIGIN = (By.XPATH, "//div[@id='originDiv']//input")
     INPUT_DESTINATION = (By.XPATH, "//input[@aria-labelledby='arrivalStationInputLabel'] | //div[@class='control_field_inner']/div[@id='arrivalStationInputLabel']/following-sibling::input")
+
+    BTN_PASSENGERS = (By.XPATH, "//div[@class='control_field_button_value']")
+    BTN_ADD_ADULT = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[1]/div[2]/ibe-minus-plus/div/button[2]")
+    BTN_ADD_YOUTH = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[2]/div[2]/ibe-minus-plus/div/button[2]")
+    BTN_ADD_CHILD = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[3]/div[2]/ibe-minus-plus/div/button[2]")
+    BTN_ADD_INFANT = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[4]/div[2]/ibe-minus-plus/div/button[2]")
+    BTN_REMOVE_ADULT = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[1]/div[2]/ibe-minus-plus/div/button[1]")
+    BTN_REMOVE_YOUTH = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[2]/div[2]/ibe-minus-plus/div/button[1]")
+    BTN_REMOVE_CHILD = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[3]/div[2]/ibe-minus-plus/div/button[1]")
+    BTN_REMOVE_INFANT = (By.XPATH, "//ul[contains(@attr.aria-labelledby,'ibeSearchPaxControlLabel')]/li[4]/div[2]/ibe-minus-plus/div/button[1]")
+    BTN_CONFIRM_PASSENGERS = (By.XPATH, "//*[@class='button control_options_selector_action_button']")
+    BTN_SEARCH = (By.ID ,"searchButton")
 
     def open_language_dropdown(self):
         """Hace clic en el botón para abrir el dropdown de selección de idioma."""
@@ -104,3 +117,38 @@ class BookingPage(BasePage):
     def write_destination(self, text):
         self.enter_text(self.INPUT_DESTINATION, text)
 
+    def click_passengers(self):
+        self.click(self.BTN_PASSENGERS)
+
+    def add_adult(self):
+        self.click(self.BTN_ADD_ADULT)
+
+    def add_youth(self):
+        self.click(self.BTN_ADD_YOUTH)
+
+    def add_child(self):
+        self.click(self.BTN_ADD_CHILD)
+
+    def add_infant(self):
+        self.click(self.BTN_ADD_INFANT)
+
+    def remove_adult(self):
+        self.click(self.BTN_REMOVE_ADULT)
+
+    def remove_youth(self):
+        self.click(self.BTN_REMOVE_YOUTH)
+
+    def remove_child(self):
+        self.click(self.BTN_REMOVE_CHILD)
+
+    def remove_infant(self):
+        self.click(self.BTN_REMOVE_INFANT)
+
+    def click_confirm(self):
+        self.click(self.BTN_CONFIRM_PASSENGERS)
+
+    def click_search(self):
+        self.click(self.BTN_SEARCH)
+
+    def loader_invisibility(self):
+        WebDriverWait(self.driver, 40).until(EC.invisibility_of_element_located((By.XPATH, LOADER)))
