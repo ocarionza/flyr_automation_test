@@ -15,8 +15,6 @@ def test_payment(driver, start_recording):
 
     with allure.step(f"Iniciar la prueba para realizar el pago"):
 
-        #payment_page.click_panel_header_card()
-        #time.sleep(2)
         payment_page.open_iframe_card()
         payment_page.type_card_holder_card('Quinzia Tobenna')
         payment_page.type_card_number_card('4544001898922433')
