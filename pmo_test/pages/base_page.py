@@ -95,3 +95,10 @@ class BasePage:
         except WebDriverException as exception:
             logger.info(f"No se pueden obtener las opciones del listado {exception.msg}")
             return None
+
+    def validate_element(self, locator):
+        try:
+            self.wait_for_element(locator)
+            return True
+        except TimeoutException:
+            return False

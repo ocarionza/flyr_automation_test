@@ -6,6 +6,7 @@ from pages.booking_page import BookingPage
 from utils.logger import get_logger
 from .test_select_flight import test_select_flight
 from .test_passengers import test_fill_passengers
+from .test_services import test_services
 
 logger = get_logger()
 
@@ -56,6 +57,7 @@ def test_booking(driver, start_recording):
         time.sleep(2)
         test_select_flight(driver, start_recording)
         test_fill_passengers(driver, start_recording)
+        test_services(driver, start_recording)
 
         logger.info("se completo la prueba de reserva")
 
