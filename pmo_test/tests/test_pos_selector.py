@@ -46,7 +46,7 @@ def test_change_pos(driver, start_recording):
             time.sleep(2)
 
 
-            pos_button_element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//li[contains(@class, 'main-header_nav-secondary_item--point-of-sale-selector')]//span[@class='button_label']")))
+            pos_button_element = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, f"//*[@id='pointOfSaleSelectorId']//span[2][contains(.,'{pos}')]")))
             selected_pos_text = pos_button_element.text.strip()
             selected_pos_text = selected_pos_text.split('\n')[0].strip()
             assert selected_pos_text == pos, f"El texto del selector POS '{selected_pos_text}' no coincide con el POS esperado '{pos}'"

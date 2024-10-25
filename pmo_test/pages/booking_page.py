@@ -1,6 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from utils.logger import get_logger
 
@@ -36,23 +34,13 @@ class BookingPage(BasePage):
     def open_language_dropdown(self):
         """Hace clic en el botón para abrir el dropdown de selección de idioma."""
         logger.info("Abriendo el menú de selección de idioma")
-
-        # Espera explícita para asegurarse de que el botón esté listo para ser clicado
-        wait = WebDriverWait(self.driver, 10)
-        dropdown_button = wait.until(EC.element_to_be_clickable(self.LANGUAGE_DROPDOWN_BUTTON))
-
-        dropdown_button.click()
+        self.click(self.LANGUAGE_DROPDOWN_BUTTON)
         logger.info("Menú de selección de idioma abierto")
 
     def open_pos_selector(self):
         """Hace clic en el botón para abrir el popup de paises"""
         logger.info("Abriendo el popup para seleccionar el POS")
-
-        # Espera explícita para asegurarse de que el botón esté listo para ser clicado
-        wait = WebDriverWait(self.driver, 10)
-        pos_button = wait.until(EC.element_to_be_clickable(self.POS_SELECTOR))
-
-        pos_button.click()
+        self.click(self.POS_SELECTOR)
         logger.info("Menú de selección de POS abierto")
 
     def select_language(self, language):
@@ -61,60 +49,40 @@ class BookingPage(BasePage):
 
         # XPath dinámico basado en el idioma
         language_option_xpath = (By.XPATH, self.LANGUAGE_OPTION_TEMPLATE.format(language))
+        self.click(language_option_xpath)
 
-        # Espera explícita para que la opción de idioma esté disponible
-        wait = WebDriverWait(self.driver, 10)
-        language_option = wait.until(EC.element_to_be_clickable(language_option_xpath))
-
-        language_option.click()
         logger.info(f"Idioma '{language}' seleccionado correctamente")
 
     def select_pos(self, pos):
         """Selecciona un POS dinámicamente"""
         logger.info(f"Seleccionando el pos '{pos}' dinámicamente")
 
-        # XPath dinámico basado en el idioma
         pos_option_xpath = (By.XPATH, self.POS_LIST.format(pos))
+        self.click(pos_option_xpath)
 
-        # Espera explícita para que la opción de idioma esté disponible
-        wait = WebDriverWait(self.driver, 10)
-        pos_option = wait.until(EC.element_to_be_clickable(pos_option_xpath))
-
-        pos_option.click()
         logger.info(f"POS '{pos}' seleccionado correctamente")
 
     def apply_pos(self):
         """Hace clic en el botón para aplicar el POS"""
-
-        # Espera explícita para asegurarse de que el botón esté listo para ser clicado
-        wait = WebDriverWait(self.driver, 10)
-        pos_button_apply = wait.until(EC.element_to_be_clickable(self.POS_APPLY_SELECTOR))
-
-        pos_button_apply.click()
+        self.click(self.POS_APPLY_SELECTOR)
         logger.info("Boton aplicar seleccionado")
 
     def click_one_way(self):
-        wait = WebDriverWait(self.driver, 10)
-        one_way_button = wait.until(EC.element_to_be_clickable(self.ONE_WAY_RADIO))
-
-        one_way_button.click()
+        self.click(self.ONE_WAY_RADIO)
         logger.info("Seleccion tipo de viaje one way")
 
     def click_round_trip(self):
-        wait = WebDriverWait(self.driver, 10)
-        round_trip_button = wait.until(EC.element_to_be_clickable(self.ROUND_TRIP_RADIO))
-
-        round_trip_button.click()
+        self.click(self.ROUND_TRIP_RADIO)
         logger.info("Seleccion tipo de viaje one way")
 
     def write_origin(self, text):
-        wait = WebDriverWait(self.driver, 10)
-        origin_field = wait.until(EC.element_to_be_clickable(self.ORIGIN_FIELD))
-        origin_field.click()
+        self.click(self.ORIGIN_FIELD)
         self.enter_text(self.INPUT_ORIGIN, text)
+        self.key_enter(self.INPUT_ORIGIN)
 
     def write_destination(self, text):
         self.enter_text(self.INPUT_DESTINATION, text)
+        self.key_enter(self.INPUT_DESTINATION)
 
     def click_passengers(self):
         self.click(self.BTN_PASSENGERS)

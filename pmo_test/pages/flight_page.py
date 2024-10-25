@@ -14,7 +14,6 @@ class FlightPage(BasePage):
 
     def select_fare(self, fare):
         select_fare = (By.XPATH, self.BTN_SELECT_FARE.format(fare))
-        self.wait_for_element(select_fare)
         self.click(select_fare)
         self.loader_invisibility()
 

@@ -1,8 +1,9 @@
+import random
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, WebDriverException
 from utils.logger import get_logger
 from config.environment import LOADER
 
@@ -34,7 +35,7 @@ class BasePage:
         """Espera hasta que un elemento sea visible."""
         try:
             logger.info(f"Esperar el elemento: {locator}")
-            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+            WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             logger.error(f"Timeout esperando por el elemento: {locator}")
             raise
@@ -43,10 +44,28 @@ class BasePage:
         """Hace clic en un elemento."""
         self.find_element(locator).click()
 
+    def click_js(self, locator):
+        script = f"""
+            var element_path = "{locator}";
+            function getElementByXpath(path) {{
+                return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            }}
+            var element = getElementByXpath(element_path);
+            if (element) {{
+                element.click();
+                console.log("Click en el toggle realizado.");
+            }} else {{
+                console.log("Elemento no encontrado para el XPath: " + element_path);
+            }}
+            """
+        self.driver.execute_script(script)
+
     def enter_text(self, locator, text):
         """Ingresa texto en un campo."""
         self.find_element(locator).clear()
         self.find_element(locator).send_keys(text)
+
+    def key_enter(self, locator):
         self.find_element(locator).send_keys(Keys.ENTER)
 
     def loader_invisibility(self):
@@ -56,3 +75,23 @@ class BasePage:
         element = WebDriverWait(self.driver, 15).until(EC.visibility_of_element_located(locator))
         self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
         return element
+
+    def select_random_option(self, type_selector, locator):
+        options = []
+        try:
+            if type_selector == "xpath":
+                options = WebDriverWait(self.driver, 15).until(
+                    EC.visibility_of_all_elements_located((By.XPATH, locator)))
+            elif type_selector == "id":
+                options = WebDriverWait(self.driver, 15).until(
+                    EC.visibility_of_all_elements_located((By.ID, locator)))
+
+            if options:
+                selected_option = random.choice(options)
+                selected_option_text = selected_option.text
+
+                return selected_option_text
+
+        except WebDriverException as exception:
+            logger.info(f"No se pueden obtener las opciones del listado {exception.msg}")
+            return None

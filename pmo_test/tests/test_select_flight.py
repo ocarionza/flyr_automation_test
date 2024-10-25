@@ -18,8 +18,7 @@ def test_select_flight(driver, start_recording):
         flight_page.select_fare("basic")
         time.sleep(2)
         flight_page.click_continue()
-        time.sleep(10)
 
         logger.info("se completo la seleccion de vuelo")
 
-    allure.attach(driver.get_screenshot_as_png(), name=f"booking_one_way",attachment_type=allure.attachment_type.PNG)
+    allure.attach(driver.get_screenshot_as_png(), name="select_flight",attachment_type=allure.attachment_type.PNG)
