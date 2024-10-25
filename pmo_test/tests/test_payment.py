@@ -23,16 +23,15 @@ def test_payment(driver, start_recording):
         payment_page.select_expire_year_card('26')
         payment_page.type_cvv_card('826')
         payment_page.close_iframe_card()
+        allure.attach(driver.get_screenshot_as_png(), name="payment_test", attachment_type=allure.attachment_type.PNG)
         time.sleep(1)
         payment_page.type_email_card('zajoseza@gamil.com')
         payment_page.type_address_card('CR 10 B # 50 A 39')
         payment_page.type_city_card('Manizales')
         payment_page.select_country()
         payment_page.click_check_box_privacy_policy()
+        allure.attach(driver.get_screenshot_as_png(), name="payment_test", attachment_type=allure.attachment_type.PNG)
         time.sleep(1)
         payment_page.click_btn_confirm_pay()
-        time.sleep(5)
 
     logger.info("Se ha realizado el pago")
-
-    allure.attach(driver.get_screenshot_as_png(), name="payment_test",attachment_type=allure.attachment_type.PNG)

@@ -1,5 +1,7 @@
 *.pyc
 __pycache__/
 drivers/
-reports/
+allure-results/
 videos/
+allure-2.31.0.zip
+allure-2.31.0

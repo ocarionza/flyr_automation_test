@@ -28,14 +28,14 @@ def test_fill_passengers(driver, start_recording):
         passengers_page.select_day()
         passengers_page.select_nationality()
         time.sleep(1)
+        allure.attach(driver.get_screenshot_as_png(), name="fill_passengers",attachment_type=allure.attachment_type.PNG)
 
     passengers_page.select_phone_prefix()
     passengers_page.type_phone_number(1234567890)
     passengers_page.type_email_address("zajoseza@gmail.com")
     passengers_page.click_check_box_privacy_policy()
+    allure.attach(driver.get_screenshot_as_png(), name="fill_passengers", attachment_type=allure.attachment_type.PNG)
     passengers_page.click_continue_passengers()
     time.sleep(5)
 
     logger.info("Se llenaron los datos correctamente")
-
-    allure.attach(driver.get_screenshot_as_png(), name="fill_passengers",attachment_type=allure.attachment_type.PNG)

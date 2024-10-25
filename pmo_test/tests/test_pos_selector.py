@@ -41,6 +41,7 @@ def test_change_pos(driver, start_recording):
             time.sleep(2)
 
             booking_page.apply_pos()
+            allure.attach(driver.get_screenshot_as_png(), name=f"pos_{pos}", attachment_type=allure.attachment_type.PNG)
             logger.info(f"Se da click en el boton aplicar con el pos a '{pos}'")
 
             time.sleep(2)
@@ -52,4 +53,3 @@ def test_change_pos(driver, start_recording):
             assert selected_pos_text == pos, f"El texto del selector POS '{selected_pos_text}' no coincide con el POS esperado '{pos}'"
 
             logger.info(f"Prueba completada: El pos fue cambiado correctamente a '{pos}'")
-            allure.attach(driver.get_screenshot_as_png(), name=f"pos_{pos}",attachment_type=allure.attachment_type.PNG)

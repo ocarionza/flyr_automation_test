@@ -41,5 +41,4 @@ def test_change_language(driver, start_recording):
             assert language in current_language.get_attribute("aria-label"), f"No se cambió el idioma a '{language}'"
 
             logger.info(f"Prueba completada: El idioma fue cambiado correctamente a '{language}'")
-
             allure.attach(driver.get_screenshot_as_png(), name=f"Idioma_{language}",attachment_type=allure.attachment_type.PNG)

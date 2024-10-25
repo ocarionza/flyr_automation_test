@@ -27,16 +27,18 @@ def test_booking(driver, start_recording):
         booking_page.open_pos_selector()
         booking_page.select_pos("Colombia")
         booking_page.apply_pos()
-
+        allure.attach(driver.get_screenshot_as_png(), name=f"booking_one_way",attachment_type=allure.attachment_type.PNG)
         logger.info("Idioma y POS seleccionados")
 
         booking_page.click_one_way()
         booking_page.write_origin('PEI')
         booking_page.write_destination('CTG')
+        allure.attach(driver.get_screenshot_as_png(), name=f"booking_one_way",attachment_type=allure.attachment_type.PNG)
         booking_page.click_passengers()
         booking_page.add_youth()
         booking_page.add_child()
         booking_page.add_infant()
+        allure.attach(driver.get_screenshot_as_png(), name=f"booking_one_way",attachment_type=allure.attachment_type.PNG)
         booking_page.click_confirm()
         booking_page.click_search()
         booking_page.loader_invisibility()
@@ -47,5 +49,3 @@ def test_booking(driver, start_recording):
         test_payment(driver, start_recording)
 
         logger.info("se completo la prueba de reserva")
-
-    allure.attach(driver.get_screenshot_as_png(), name=f"booking_one_way",attachment_type=allure.attachment_type.PNG)
