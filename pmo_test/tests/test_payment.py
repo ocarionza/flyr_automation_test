@@ -1,6 +1,7 @@
 import time
 import allure
 from pages.payment_page import PaymentPage
+from selenium.webdriver.common.devtools.v85.debugger import pause
 from utils.logger import get_logger
 
 logger = get_logger()
@@ -18,19 +19,29 @@ def test_payment(driver, start_recording):
         #time.sleep(2)
         payment_page.open_iframe_card()
         time.sleep(2)
-        payment_page.type_card_holder_card('Matti Tien')
+        payment_page.type_card_holder_card('Quinzia Tobenna')
         time.sleep(2)
-        payment_page.type_card_number_card('4099836470157372')
+        payment_page.type_card_number_card('4544001898922433')
         time.sleep(2)
-        payment_page.select_expire_month_card('12')
+        payment_page.select_expire_month_card('07')
         time.sleep(2)
-        payment_page.select_expire_year_card('27')
+        payment_page.select_expire_year_card('26')
         time.sleep(2)
-        payment_page.type_cvv_card('547')
+        payment_page.type_cvv_card('826')
         time.sleep(2)
         payment_page.close_iframe_card()
-
-
+        time.sleep(2)
+        payment_page.type_email_card('zajoseza@gamil.com')
+        time.sleep(2)
+        payment_page.type_address_card('CR 10 B # 50 A 39')
+        time.sleep(2)
+        payment_page.type_city_card('Manizales')
+        time.sleep(2)
+        payment_page.select_country()
+        time.sleep(2)
+        payment_page.click_check_box_privacy_policy()
+        time.sleep(2)
+        payment_page.click_btn_confirm_pay()
 
     logger.info("Se ha realizado el pago")
 
