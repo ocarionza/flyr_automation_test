@@ -1,4 +1,3 @@
-from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utils.logger import get_logger
