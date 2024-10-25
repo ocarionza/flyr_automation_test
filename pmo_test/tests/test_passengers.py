@@ -19,6 +19,7 @@ def test_fill_passengers(driver, start_recording):
         first_name = faker.first_name()
         last_name = faker.last_name()
 
+    while passengers_page.validate_nationality():
         passengers_page.select_gender()
         time.sleep(2)
         passengers_page.type_first_name(first_name)
@@ -34,17 +35,17 @@ def test_fill_passengers(driver, start_recording):
         passengers_page.select_nationality()
         time.sleep(2)
 
-        passengers_page.select_phone_prefix()
-        time.sleep(2)
-        passengers_page.type_phone_number(1234567890)
-        time.sleep(2)
-        passengers_page.type_email_address("zajoseza@gmail.com")
-        time.sleep(2)
-        passengers_page.click_check_box_privacy_policy()
-        time.sleep(2)
-        passengers_page.click_continue_passengers()
-        time.sleep(5)
+    passengers_page.select_phone_prefix()
+    time.sleep(2)
+    passengers_page.type_phone_number(1234567890)
+    time.sleep(2)
+    passengers_page.type_email_address("zajoseza@gmail.com")
+    time.sleep(2)
+    passengers_page.click_check_box_privacy_policy()
+    time.sleep(2)
+    passengers_page.click_continue_passengers()
+    time.sleep(5)
 
-        logger.info("Se llenaron los datos correctamente")
+    logger.info("Se llenaron los datos correctamente")
 
     allure.attach(driver.get_screenshot_as_png(), name="fill_passengers",attachment_type=allure.attachment_type.PNG)
