@@ -15,9 +15,9 @@ def test_services(driver, start_recording):
     with allure.step(f"Iniciar la prueba para seleccionar servicios"):
 
         services_page.select_service()
-        allure.attach(driver.get_screenshot_as_png(), name="select_flight", attachment_type=allure.attachment_type.PNG)
+        allure.attach(driver.get_screenshot_as_png(), name="select_service", attachment_type=allure.attachment_type.PNG)
         services_page.click_btn_confirm_services()
-        allure.attach(driver.get_screenshot_as_png(), name="select_flight", attachment_type=allure.attachment_type.PNG)
+        allure.attach(driver.get_screenshot_as_png(), name="select_service", attachment_type=allure.attachment_type.PNG)
         services_page.click_continue_services()
         time.sleep(10)
 

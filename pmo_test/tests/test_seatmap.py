@@ -17,6 +17,5 @@ def test_seatmap(driver, start_recording):
         seatmap_page.click_pax_select_seat()
         allure.attach(driver.get_screenshot_as_png(), name="seatmap_test", attachment_type=allure.attachment_type.PNG)
         seatmap_page.click_continue_seatmap()
-        time.sleep(10)
 
     logger.info("Se seleccionaron los Asientos correctamente")
