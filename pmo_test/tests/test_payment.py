@@ -18,7 +18,7 @@ def test_payment(driver, start_recording):
         payment_page.open_iframe_card()
         payment_page.type_card_holder_card('Quinzia Tobenna')
         payment_page.type_card_number_card('4544001898922433')
-        payment_page.select_expire_month_card('07')
+        payment_page.select_expire_month_card('7')
         payment_page.select_expire_year_card('26')
         payment_page.type_cvv_card('826')
         payment_page.close_iframe_card()
