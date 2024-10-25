@@ -68,6 +68,9 @@ class BasePage:
     def key_enter(self, locator):
         self.find_element(locator).send_keys(Keys.ENTER)
 
+    def key_end(self, locator):
+        self.find_element(locator).send_keys(Keys.END)
+
     def loader_invisibility(self):
         WebDriverWait(self.driver, 40).until(EC.invisibility_of_element_located((By.XPATH, LOADER)))
 
