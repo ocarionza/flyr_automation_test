@@ -16,17 +16,20 @@ def test_payment(driver, start_recording):
     with allure.step(f"Iniciar la prueba para realizar el pago"):
 
         payment_page.open_iframe_card()
+        time.sleep(1)
         payment_page.type_card_holder_card('Quinzia Tobenna')
         payment_page.type_card_number_card('4544001898922433')
         payment_page.select_expire_month_card('7')
         payment_page.select_expire_year_card('26')
         payment_page.type_cvv_card('826')
         payment_page.close_iframe_card()
+        time.sleep(1)
         payment_page.type_email_card('zajoseza@gamil.com')
         payment_page.type_address_card('CR 10 B # 50 A 39')
         payment_page.type_city_card('Manizales')
         payment_page.select_country()
         payment_page.click_check_box_privacy_policy()
+        time.sleep(1)
         payment_page.click_btn_confirm_pay()
         time.sleep(5)
 
