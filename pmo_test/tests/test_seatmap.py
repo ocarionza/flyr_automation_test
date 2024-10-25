@@ -16,7 +16,7 @@ def test_seatmap(driver, start_recording):
 
         seatmap_page.click_pax_select_seat()
         seatmap_page.click_continue_seatmap()
-        time.sleep(10)
+        time.sleep(5)
 
     logger.info("Se seleccionaron los Asientos correctamente")
 

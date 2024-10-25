@@ -17,7 +17,7 @@ def test_services(driver, start_recording):
         services_page.select_service()
         services_page.click_btn_confirm_services()
         services_page.click_continue_services()
-        time.sleep(10)
+        time.sleep(5)
 
     logger.info("Se seleccionaron los servicios correctamente")
 
