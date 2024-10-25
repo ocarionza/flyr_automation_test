@@ -1,10 +1,8 @@
 import time
 import allure
-from faker import Faker
 from pages.services_page import ServicesPage
 from utils.logger import get_logger
 
-faker = Faker()
 logger = get_logger()
 
 @allure.epic('Seleccionar servicios')
@@ -17,9 +15,9 @@ def test_services(driver, start_recording):
     with allure.step(f"Iniciar la prueba para seleccionar servicios"):
 
         services_page.select_service()
-        time.sleep(2)
+        services_page.click_btn_confirm_services()
         services_page.click_continue_services()
-        time.sleep(5)
+        time.sleep(10)
 
     logger.info("Se seleccionaron los servicios correctamente")
 

@@ -14,10 +14,9 @@ def test_select_flight(driver, start_recording):
     with allure.step(f"Iniciar la prueba para seleccionar vuelo"):
 
         flight_page.click_select_flight_and_show_fares()
-        time.sleep(2)
         flight_page.select_fare("basic")
-        time.sleep(2)
         flight_page.click_continue()
+        time.sleep(5)
 
         logger.info("se completo la seleccion de vuelo")
 

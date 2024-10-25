@@ -102,3 +102,13 @@ class BasePage:
             return True
         except TimeoutException:
             return False
+
+    def scroll_up_arrows(self, locator):
+        self.find_element(locator).send_keys(Keys.ARROW_UP)
+        self.find_element(locator).send_keys(Keys.ARROW_UP)
+        self.find_element(locator).send_keys(Keys.ARROW_UP)
+
+    def scroll_down_arrows(self, locator):
+        self.find_element(locator).send_keys(Keys.ARROW_DOWN)
+        self.find_element(locator).send_keys(Keys.ARROW_DOWN)
+        self.find_element(locator).send_keys(Keys.ARROW_DOWN)
