@@ -19,26 +19,34 @@ Este es un proyecto de pruebas automatizadas utilizando Selenium y el patrón Pa
 2. Instala las dependencias:
 3. Instalar el paquete de Allure y añadirlo al PATH en las variables de entorno
 4. Instalar el Ffmpeg y añadirlo al PATH en las variables de entorno
-5. Se debe modificar el conmando ffmpeg de grabacion en el archivo () de acuerdo a su sistema operativo
+5. Se debe modificar el conmando ffmpeg de grabacion en el archivo (test/conftest.py) de acuerdo a su sistema operativo
 
+Comado Mac Ffmpeg
+```bash
+ffmpeg -y -f avfoundation -framerate 30 -i "0" -c:v libx264 -r 30 -pix_fmt yuv420p {video_path}
+```
+
+Comando linux Ffmpeg
+```bash
+ffmpeg -y -f x11grab -framerate 30 -i :0.0 -c:v libx264 -r 30 -pix_fmt yuv420p {video_path}
+```
+
+Instalar dependecias
 ```bash
 pip install -r requirements.txt
 ```
 
 Ejecucion prueba one-way (Se seleccionan servicios aleatorios y asientos aleatorios)
-
 ```bash
 pytest .\tests\test_one_way.py --browser=chrome -m=oneway --alluredir=allure-results
 ```
 
 Ejecucion prueba de cambio de idioma
-
 ```bash
 pytest .\tests\test_language_selector.py --browser=chrome -m=oneway --alluredir=allure-results
 ```
 
 Ejecucion prueba de cambio de POS
-
 ```bash
 pytest .\tests\test_pos_selector.py --browser=chrome -m=oneway --alluredir=allure-results
 ```
