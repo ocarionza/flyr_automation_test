@@ -43,10 +43,10 @@ pytest .\tests\test_one_way.py --browser=chrome -m=oneway --alluredir=allure-res
 
 Ejecucion prueba de cambio de idioma
 ```bash
-pytest .\tests\test_language_selector.py --browser=chrome -m=oneway --alluredir=allure-results
+pytest .\tests\test_language_selector.py --browser=chrome --alluredir=allure-results
 ```
 
 Ejecucion prueba de cambio de POS
 ```bash
-pytest .\tests\test_pos_selector.py --browser=chrome -m=oneway --alluredir=allure-results
+pytest .\tests\test_pos_selector.py --browser=chrome --alluredir=allure-results
 ```
