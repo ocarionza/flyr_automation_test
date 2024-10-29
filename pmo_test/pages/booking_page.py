@@ -73,7 +73,7 @@ class BookingPage(BasePage):
 
     def click_round_trip(self):
         self.click(self.ROUND_TRIP_RADIO)
-        logger.info("Seleccion tipo de viaje one way")
+        logger.info("Seleccion tipo de viaje round trip")
 
     def write_origin(self, text):
         self.click(self.ORIGIN_FIELD)

@@ -2,6 +2,7 @@ import pytest
 import allure
 import subprocess
 import os
+import shutil
 from datetime import datetime
 from config.browser_config import get_driver
 from utils.logger import get_logger
@@ -10,6 +11,13 @@ logger = get_logger()
 
 # Path donde se guardarán los videos
 VIDEO_DIR = "videos/"
+
+@pytest.fixture(scope="session", autouse=True)
+def clear_allure_reports():
+    report_dir = "allure_reports/"
+    if os.path.exists(report_dir):
+        shutil.rmtree(report_dir)  # Borra el directorio de reportes de Allure
+        print(f"Reportes de Allure en {report_dir} eliminados.")
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item, call):

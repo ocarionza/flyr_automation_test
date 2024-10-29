@@ -1,3 +1,4 @@
+import random
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
@@ -16,7 +17,7 @@ class PassengersPage(BasePage):
 
     BTN_NATIONALITY = (By.XPATH, "//button[starts-with(@id,'IdDocNationality') and not(contains(@class,'has-value'))]")
     OPTIONS_NATIONALITY = "//button[contains(@id, 'IdDocNationality_') and not(@style)]"
-    OPTION_NATIONALITY = "//button[contains(@id, 'IdDocNationality_') and not(@style) and contains(.,'{}')]"
+    OPTION_NATIONALITY = "(//button[contains(@id, 'IdDocNationality_') and not(@style)])[{}]"
 
     BTN_PHONE_PREFIX = (By.ID, "phone_prefixPhoneId")
     INPUT_PHONE_NUMBER = (By.ID, "phone_phoneNumberId")
@@ -24,6 +25,7 @@ class PassengersPage(BasePage):
 
     DROPDOWN_SELECT_OPTIONS = "//li/button[@class='ui-dropdown_item_option']"
     DROPDOWN_SELECT_VALUE = "//li[starts-with(@class,'ui-dropdown_item') and contains(.,'{}')]"
+    DROPDOWN_SELECT_NUMBER = "//li[starts-with(@class,'ui-dropdown_item')][{}]"
 
     CHECK_BOX_PRIVACY_POLICY = (By.XPATH, "//*[@class='contact_terms ng-star-inserted']")
 
@@ -65,9 +67,11 @@ class PassengersPage(BasePage):
 
     def select_nationality(self):
         self.click(self.BTN_NATIONALITY)
-        nationality_value = self.select_random_option('xpath', self.OPTIONS_NATIONALITY)
-        if nationality_value:
-            locator = (By.XPATH, self.OPTION_NATIONALITY.format(nationality_value))
+        elements = self.driver.find_elements(By.XPATH, self.OPTIONS_NATIONALITY)
+        count = len(elements)
+        random_number = random.randint(1, count)
+        if random_number:
+            locator = (By.XPATH, self.OPTION_NATIONALITY.format(random_number))
             self.click(locator)
 
     def validate_nationality(self):
@@ -79,9 +83,11 @@ class PassengersPage(BasePage):
 
     def select_phone_prefix(self):
         self.click(self.BTN_PHONE_PREFIX)
-        phone_prefix_value = self.select_random_option('xpath', self.DROPDOWN_SELECT_OPTIONS + "/span[1]")
-        if phone_prefix_value:
-            locator = (By.XPATH, self.DROPDOWN_SELECT_VALUE.format(phone_prefix_value))
+        elements = self.driver.find_elements(By.XPATH, self.DROPDOWN_SELECT_OPTIONS)
+        count = len(elements)
+        random_number = random.randint(1, count)
+        if random_number:
+            locator = (By.XPATH, self.DROPDOWN_SELECT_NUMBER.format(random_number))
             self.click(locator)
 
     def type_phone_number(self, text):

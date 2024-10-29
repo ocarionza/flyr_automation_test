@@ -19,6 +19,6 @@ def test_services(driver, start_recording):
         services_page.click_btn_confirm_services()
         allure.attach(driver.get_screenshot_as_png(), name="select_service", attachment_type=allure.attachment_type.PNG)
         services_page.click_continue_services()
-        time.sleep(10)
+        time.sleep(20)
 
     logger.info("Se seleccionaron los servicios correctamente")

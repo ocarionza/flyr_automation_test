@@ -5,6 +5,7 @@ from utils.logger import get_logger
 logger = get_logger()
 
 class SeatmapPage(BasePage):
+    ALL_BTN_SEGMENT = "//*[starts-with(@class,'segment-selector_tab ')]"
     BTN_SEGMENT = "//*[starts-with(@class,'segment-selector_tab ')][{}]"
     ALL_PAX = "//*[starts-with(@class,'pax-selector_item ')]"
     BTN_PAX = "//*[starts-with(@class,'pax-selector_item ')][{}]"
@@ -20,9 +21,18 @@ class SeatmapPage(BasePage):
 
     BTN_CONTINUE = (By.XPATH, "//*[starts-with(@class,'button amount-summary_button ')][2]")
 
-    def click_segment(self):
-        locator = (By.XPATH, self.BTN_SEGMENT.format(1))
+    def click_segment(self, segment_number):
+        locator = (By.XPATH, self.BTN_SEGMENT.format(segment_number))
         self.click(locator)
+
+    def click_all_segment(self):
+        elements = self.driver.find_elements(By.XPATH, self.ALL_BTN_SEGMENT)
+        count = len(elements)
+        for i in range(1, count + 1):
+            locator = (By.XPATH, self.BTN_SEGMENT.format(i))
+            self.click(locator)
+            self.click_pax_select_seat()
+            self.loader_invisibility()
 
     def click_pax(self, pax_number):
         locator = (By.XPATH, self.BTN_PAX.format(pax_number))
